@@ -23,7 +23,7 @@ def cube(num):
 @app.route('/fibonacci/<int:nterms>', methods = ['GET'])
 def fibonacci(nterms):
     metric_start = time.time()
-    fib = {}
+    fib = []
     n1, n2 = 0, 1
     count = 0
 
@@ -46,11 +46,11 @@ def fibonacci(nterms):
     metric_end  = time.time()
     metric_diff = metric_end - metric_start
     if fib[0]==999999:
-        return jsonify({'value': "Please enter a positive value",'time_taken': metric_diff})
+        return jsonify({'value': "Please enter a value greated than 0",'time_taken': metric_diff})
     else:
         return jsonify({'value': fib,'time_taken': metric_diff})
 
 # driver function
 if __name__ == '__main__':
   
-    app.run(debug = True, host='0.0.0.0')
+    app.run(debug = True)
