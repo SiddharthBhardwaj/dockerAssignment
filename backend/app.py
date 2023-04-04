@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from datetime import datetime
 import time
+import sqlite3
 app = Flask(__name__)
 
 # square root of function
@@ -10,6 +11,9 @@ def square(num):
     square_value = num**2
     metric_end  = time.time()
     metric_diff = metric_end - metric_start
+    conn = sqlite3.connect('assignment.db')
+    conn.execute("INSERT INTO SQUARE_METRIC (START_TIME,END_TIME,TIME_DIFF) VALUES (%s,%s,%s),(metric_start,metric_end,metric_diff)")
+    conn.commit()
     return jsonify({'value': square_value,'time_taken': metric_diff})
 
 @app.route('/cube/<int:num>', methods = ['GET'])
@@ -18,6 +22,9 @@ def cube(num):
     square_value = num**3
     metric_end  = time.time()
     metric_diff = metric_end - metric_start
+    conn = sqlite3.connect('assignment.db')
+    conn.execute("INSERT INTO CUBE_METRIC (START_TIME,END_TIME,TIME_DIFF) VALUES (%s,%s,%s),(metric_start,metric_end,metric_diff)")
+    conn.commit()
     return jsonify({'value': square_value,'time_taken': metric_diff})
 
 @app.route('/fibonacci/<int:nterms>', methods = ['GET'])
@@ -45,6 +52,9 @@ def fibonacci(nterms):
             count += 1
     metric_end  = time.time()
     metric_diff = metric_end - metric_start
+    conn = sqlite3.connect('assignment.db')
+    conn.execute("INSERT INTO FIB_METRIC (START_TIME,END_TIME,TIME_DIFF) VALUES (%s,%s,%s),(metric_start,metric_end,metric_diff)")
+    conn.commit()
     if fib[0]==999999:
         return jsonify({'value': "Please enter a value greated than 0",'time_taken': metric_diff})
     else:
