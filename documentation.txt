@@ -1,0 +1,2 @@
+# db pull command
+docker pull keinos/sqlite3:latest
