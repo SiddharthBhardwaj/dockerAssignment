@@ -1,2 +1,16 @@
 # db pull command
 docker pull keinos/sqlite3:latest
+
+
+# set the values as 777 for folders
+chmod -R 777 dockersAssignment
+
+# run Interactive Platform
+docker run --rm -it -v "$(pwd):/workspace" -w /workspace keinos/sqlite3
+
+# Commands for interactive platforms
+.open ./assignment.db
+CREATE TABLE square_metric(metric_start REAL, metric_end REAL, metric_diff REAL);
+CREATE TABLE cube_metric(metric_start REAL, metric_end REAL, metric_diff REAL);
+CREATE TABLE fib_metric(metric_start REAL, metric_end REAL, metric_diff REAL);
+.quit
