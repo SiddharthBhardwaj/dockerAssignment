@@ -1,21 +1,19 @@
-#Deriving the latest base image
-FROM python:latest
+# start by pulling the python image
+FROM python:3.8-alpine
 
+# copy the requirements file into the image
+COPY ./requirements.txt /backend/requirements.txt
 
-#Labels as key value pair
-LABEL Maintainer="Siddharth.Bhardwaj"
-
-
-# Any working directory can be chosen as per choice like '/' or '/home' etc
-# i have chosen /usr/app/src
+# switch working directory
 WORKDIR /root/dockerAssignment/backend
 
-#to COPY the remote file at working directory in container
-COPY app.py ./
-# Now the structure looks like this '/usr/app/src/test.py'
+# install the dependencies and packages in the requirements file
+RUN pip install -r requirements.txt
 
+# copy every content from the local file to the image
+COPY . /backend
 
-#CMD instruction should be used to run the software
-#contained by your image, along with any arguments.
+# configure the container to run in an executed manner
+ENTRYPOINT [ "python" ]
 
-CMD [ "python", "app.py"]
+CMD ["view.py" ]
