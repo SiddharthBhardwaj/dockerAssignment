@@ -12,7 +12,7 @@ def square(num):
     metric_end  = time.time()
     metric_diff = metric_end - metric_start
     conn = sqlite3.connect('assignment.db')
-    conn.execute("INSERT INTO SQUARE_METRIC (START_TIME,END_TIME,TIME_DIFF) VALUES (%s,%s,%s),(metric_start,metric_end,metric_diff)")
+    conn.execute("INSERT INTO SQUARE_METRIC (START_TIME,END_TIME,TIME_DIFF) VALUES (?,?,?),(metric_start,metric_end,metric_diff)")
     conn.commit()
     return jsonify({'value': square_value,'time_taken': metric_diff})
 
@@ -23,7 +23,7 @@ def cube(num):
     metric_end  = time.time()
     metric_diff = metric_end - metric_start
     conn = sqlite3.connect('assignment.db')
-    conn.execute("INSERT INTO CUBE_METRIC (START_TIME,END_TIME,TIME_DIFF) VALUES (%s,%s,%s),(metric_start,metric_end,metric_diff)")
+    conn.execute("INSERT INTO CUBE_METRIC (START_TIME,END_TIME,TIME_DIFF) VALUES (?,?,?),(metric_start,metric_end,metric_diff)")
     conn.commit()
     return jsonify({'value': square_value,'time_taken': metric_diff})
 
@@ -53,7 +53,7 @@ def fibonacci(nterms):
     metric_end  = time.time()
     metric_diff = metric_end - metric_start
     conn = sqlite3.connect('assignment.db')
-    conn.execute("INSERT INTO FIB_METRIC (START_TIME,END_TIME,TIME_DIFF) VALUES (%s,%s,%s),(metric_start,metric_end,metric_diff)")
+    conn.execute("INSERT INTO FIB_METRIC (START_TIME,END_TIME,TIME_DIFF) VALUES (?,?,?),(metric_start,metric_end,metric_diff)")
     conn.commit()
     if fib[0]==999999:
         return jsonify({'value': "Please enter a value greated than 0",'time_taken': metric_diff})
