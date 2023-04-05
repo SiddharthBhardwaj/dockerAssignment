@@ -70,8 +70,7 @@ def metrics():
     cube_time = []
     fib_time  = []
     conn = sqlite3.connect('assignment.db')
-    conn.execute("SELECT * from SQUARE_METRIC")
-    square_time.append(conn.fetchall())
+    square_time.append(conn.execute("SELECT * from SQUARE_METRIC"))
     conn.commit()
     return jsonify({'Square_Avg_time': square_time})
 
