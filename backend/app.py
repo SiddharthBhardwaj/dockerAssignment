@@ -4,7 +4,7 @@ import time
 import sqlite3
 app = Flask(__name__)
 
-# square root of function
+# square of a number
 @app.route('/square/<int:num>', methods = ['GET'])
 def square(num):
     metric_start = time.time()
@@ -16,6 +16,7 @@ def square(num):
     conn.commit()
     return jsonify({'value': square_value,'time_taken': metric_diff})
 
+# cube of a number
 @app.route('/cube/<int:num>', methods = ['GET'])
 def cube(num):
     metric_start = time.time()
@@ -27,7 +28,9 @@ def cube(num):
     conn.commit()
     return jsonify({'value': square_value,'time_taken': metric_diff})
 
-@app.route('/fibonacci/<int:nterms>', methods = ['GET'])
+
+# fibonacci series of a number
+@app.route('/fib/<int:nterms>', methods = ['GET'])
 def fibonacci(nterms):
     metric_start = time.time()
     fib = []
@@ -59,6 +62,18 @@ def fibonacci(nterms):
         return jsonify({'value': "Please enter a value greated than 0",'time_taken': metric_diff})
     else:
         return jsonify({'value': fib,'time_taken': metric_diff})
+
+# metrics display
+@app.route('/metrics/', methods = ['GET'])
+def metrics():
+    square_time = []
+    cube_time = []
+    fib_time  = []
+    conn = sqlite3.connect('assignment.db')
+    conn.execute("SELECT * from SQUARE_METRIC")
+    square_time.append(conn.fetchall())
+    conn.commit()
+    return jsonify({'Square_Avg_time': square_time})
 
 # driver function
 if __name__ == '__main__':
