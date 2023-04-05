@@ -12,7 +12,7 @@ docker pull keinos/sqlite3:latest
 
 
 # set the values as 777 for folders
-chmod -R 777 dockersAssignment
+chmod -R 777 dockerAssignment
 
 # run Interactive Platform
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace keinos/sqlite3
