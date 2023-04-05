@@ -67,8 +67,10 @@ def fibonacci(nterms):
 @app.route('/metrics/', methods = ['GET'])
 def metrics():
     square_avg_time = getDataFromDb("SQUARE_METRIC")
+    cube_avg_time   = getDataFromDb("CUBE_METRIC")
+    fib_avg_time   = getDataFromDb("FIB_METRIC")
     
-    return jsonify({'Square_Avg_time': square_avg_time})
+    return jsonify({'Square_Avg_time': square_avg_time},'Cube_Avg_time': cube_avg_time},'Fib_Avg_time': fib_avg_time})
 
 
 def getDataFromDb(tableName):
