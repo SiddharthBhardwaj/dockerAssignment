@@ -80,6 +80,24 @@ def metrics():
     
     return jsonify({'Square_Avg_time': square_avg_time})
 
+
+def getDataFromDb(tableName):
+    conn = sqlite3.connect('assignment.db')
+    cursor = conn.cursor()
+    query = 'SELECT * from {}'.format(tableName)
+    cursor.execute(query)
+    results = cursor.fetchall()
+    conn.commit()
+    total_time=0
+    for row in results:
+        total_time += row[2]
+    if total_time == 0:
+        avg_time = 0
+    else:
+        avg_time = total_time/len(results)
+    
+    return avg_time
+
 # driver function
 if __name__ == '__main__':
   
