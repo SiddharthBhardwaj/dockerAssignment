@@ -1,3 +1,12 @@
+
+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
+
+https://github.com/SiddharthBhardwaj/dockerAssignment.git
+
+docker image build -t sidtest:0.0.1 /root/dockerAssignment/backend/
+
+docker run -p 5000:5000 -d sidtest:0.0.1
+
 # db pull command
 docker pull keinos/sqlite3:latest
 
@@ -8,7 +17,7 @@ chmod -R 777 dockersAssignment
 # run Interactive Platform
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace keinos/sqlite3
 
-# Commands for interactive platforms
+# Commands for interactive platforms (only once)
 .open ./assignment.db
 CREATE TABLE square_metric(metric_start REAL, metric_end REAL, metric_diff REAL);
 CREATE TABLE cube_metric(metric_start REAL, metric_end REAL, metric_diff REAL);
