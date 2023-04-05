@@ -66,17 +66,7 @@ def fibonacci(nterms):
 # metrics display
 @app.route('/metrics/', methods = ['GET'])
 def metrics():
-    cube_time = []
-    fib_time  = []
-    conn = sqlite3.connect('assignment.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * from SQUARE_METRIC")
-    results = cursor.fetchall()
-    conn.commit()
-    total_square_time=0
-    for row in results:
-        total_square_time += row[2]
-    square_avg_time = total_square_time/len(results)
+    square_avg_time = getDataFromDb("SQUARE_METRIC")
     
     return jsonify({'Square_Avg_time': square_avg_time})
 
@@ -84,8 +74,7 @@ def metrics():
 def getDataFromDb(tableName):
     conn = sqlite3.connect('assignment.db')
     cursor = conn.cursor()
-    query = 'SELECT * from {}'.format(tableName)
-    cursor.execute(query)
+    cursor.execute("SELECT * from ?",(tableName))
     results = cursor.fetchall()
     conn.commit()
     total_time=0
