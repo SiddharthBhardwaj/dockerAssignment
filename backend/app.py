@@ -66,16 +66,17 @@ def fibonacci(nterms):
 # metrics display
 @app.route('/metrics/', methods = ['GET'])
 def metrics():
-    square_time = []
+    square_avg_time = 0 
     cube_time = []
     fib_time  = []
     conn = sqlite3.connect('assignment.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * from SQUARE_METRIC")
     results = cursor.fetchall()
-    for row in results:
-        square_time.append(row[2])
     conn.commit()
+    for row in results:
+        square_avg_time += row[2]
+    
     return jsonify({'Square_Avg_time': square_time})
 
 # driver function
