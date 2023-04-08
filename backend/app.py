@@ -4,6 +4,22 @@ import time
 import sqlite3
 app = Flask(__name__)
 
+# create tables in db
+@app.route('/createtables/', methods = ['GET'])
+def createtables():
+    try:
+        conn = sqlite3.connect('assignment.db')
+        conn.execute("CREATE TABLE SQUARE_METRIC(START_TIME REAL, END_TIME REAL, TIME_DIFF REAL)")
+        conn.execute("CREATE TABLE CUBE_METRIC(START_TIME REAL, END_TIME REAL, TIME_DIFF REAL);")
+        conn.execute("CREATE TABLE FIB_METRIC(START_TIME REAL, END_TIME REAL, TIME_DIFF REAL);")
+        conn.commit()
+        res = "Table creation is success."
+        return jsonify({'response': res})
+    except:
+        res = "Tabkle creation was an error."
+        return jsonify({'response': res})
+    
+
 # square of a number
 @app.route('/square/<int:num>', methods = ['GET'])
 def square(num):
