@@ -1,8 +1,11 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from datetime import datetime
 import time
 import sqlite3
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'application/json'
 
 # create tables in db
 @app.route('/createtables/', methods = ['GET'])
