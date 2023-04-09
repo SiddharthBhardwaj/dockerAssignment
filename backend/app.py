@@ -95,7 +95,8 @@ def metrics():
 def getDataFromDb(tableName):
     conn = sqlite3.connect('assignment.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * from ?",(tableName))
+    query = 'SELECT * from {}'.format(tableName)
+    cursor.execute(query)
     results = cursor.fetchall()
     conn.commit()
     total_time=0
