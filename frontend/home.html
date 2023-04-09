@@ -1,41 +1,94 @@
-<html>
-    <head>
-        <title>
-            Docker Assignment
-        </title>
-    </head>
-    <body>
-        <br>
-        <br>
-        <form>
-            <label>Enter Value:</label>
-            <input type="text" id="inputValue" size="5"/><br><br>
-            <button onclick="squareCal(document.getElementById('inputValue').value)">Square</button><br>
-            <button onclick="cubeCal(document.getElementById('inputValue').value)">Cube</button><br>
-            <button onclick="fibCal(document.getElementById('inputValue').value)">Fibonaci</button><br>
-            <script>
-                function squareCal(sqval) {
-                    squareUrl = "http://ip172-18-0-59-cgmrcsgsf2q0008eegeg-5000.direct.labs.play-with-docker.com/square/"+sqval;
-                    let request = new XMLHttpRequest();
-                    request.open("GET", squareUrl);
-                    request.send();
-                    request.onload = () => {
-                        if (request.status === 200) {
-                            console.log(JSON.parse(request.response));
-                        } else{
-                            console.log(`error ${request.status} ${request.statusText}`);
-                        }
-                    }
-                    // fetch(squareUrl).then(response => {
-                    //     return response.json();
-                    // })
-                    // .then(users => {
-                    //     console.log(users);
-                    // })
-                }
-            </script>
-        
-        </form>
 
-    </body>
+<html>
+<head>
+	<title>Docker Assignment</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<label for="inputText">Input Text:</label>
+	<input type="text" id="inputText" name="inputText"><br><br>
+	<button onclick="squareVal()">Square</button><br>
+    <button onclick="cubeVal()">Cube</button><br>
+    <button onclick="fibVal()">Fibonacci Series</button><br>
+    <button onclick="metric()">Metric Insights</button>
+    <table id="outputTable" style="border: 1px solid black">
+		<thead style="border: 1px solid black">
+			<tr style="border: 1px solid black">
+				<th style="border: 1px solid black">Square Avg Time</th>
+				<th style="border: 1px solid black">Cube Avg Time</th>
+				<th style="border: 1px solid black">Fibonacci Avg Time</th>
+			</tr>
+		</thead>
+		<tbody style="border: 1px solid black">
+			<!-- Table rows will be generated dynamically -->
+		</tbody>
+	</table>
+
+	<script>
+		function squareVal() {
+			var inputTextValue = document.getElementById("inputText").value;
+			$.ajax({
+				url: "http://ip172-18-0-36-cgpfldg1k7jg009g97ig-5000.direct.labs.play-with-docker.com/square/" + inputTextValue,
+				type: "GET",
+				success: function(response) {
+					console.log(response.value);
+                    alert(`Output = `+response.value);
+					// Do something with the response
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+		}
+        function cubeVal() {
+			var inputTextValue = document.getElementById("inputText").value;
+			$.ajax({
+				url: "http://ip172-18-0-36-cgpfldg1k7jg009g97ig-5000.direct.labs.play-with-docker.com/cube/" + inputTextValue,
+				type: "GET",
+				success: function(response) {
+					console.log(response.value);
+                    alert(`Output = `+response.value);
+					// Do something with the response
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+		}
+        function fibVal() {
+			var inputTextValue = document.getElementById("inputText").value;
+			$.ajax({
+				url: "http://ip172-18-0-36-cgpfldg1k7jg009g97ig-5000.direct.labs.play-with-docker.com/fib/" + inputTextValue,
+				type: "GET",
+				success: function(response) {
+					console.log(response.value);
+                    alert(`Output = `+response.value);
+					// Do something with the response
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+		}
+        function metric() {
+			$.ajax({
+				url: "http://ip172-18-0-36-cgpfldg1k7jg009g97ig-5000.direct.labs.play-with-docker.com/metrics/",
+				type: "GET",
+				success: function(response) {
+					console.log(response);
+                    var tableBody = document.querySelector("#outputTable tbody");
+                    var row = tableBody.insertRow();
+                    row.insertCell(0).innerHTML = response.Square_Avg_time;
+                    row.insertCell(1).innerHTML = response.Cube_Avg_time;
+                    row.insertCell(2).innerHTML = response.Fib_Avg_time;    
+					// Do something with the response
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+		}
+	</script>
+</body>
 </html>
+
