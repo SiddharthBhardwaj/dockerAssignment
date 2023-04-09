@@ -28,7 +28,7 @@
 		function squareVal() {
 			var inputTextValue = document.getElementById("inputText").value;
 			$.ajax({
-				url: "http://ip172-18-0-36-cgpfldg1k7jg009g97ig-5000.direct.labs.play-with-docker.com/square/" + inputTextValue,
+				url: "http://localhost:5000/square/" + inputTextValue,
 				type: "GET",
 				success: function(response) {
 					console.log(response.value);
@@ -43,7 +43,7 @@
         function cubeVal() {
 			var inputTextValue = document.getElementById("inputText").value;
 			$.ajax({
-				url: "http://ip172-18-0-36-cgpfldg1k7jg009g97ig-5000.direct.labs.play-with-docker.com/cube/" + inputTextValue,
+				url: "http://localhost:5000/cube/" + inputTextValue,
 				type: "GET",
 				success: function(response) {
 					console.log(response.value);
@@ -58,7 +58,7 @@
         function fibVal() {
 			var inputTextValue = document.getElementById("inputText").value;
 			$.ajax({
-				url: "http://ip172-18-0-36-cgpfldg1k7jg009g97ig-5000.direct.labs.play-with-docker.com/fib/" + inputTextValue,
+				url: "http://localhost:5000/fib/" + inputTextValue,
 				type: "GET",
 				success: function(response) {
 					console.log(response.value);
@@ -72,7 +72,7 @@
 		}
         function metric() {
 			$.ajax({
-				url: "http://ip172-18-0-36-cgpfldg1k7jg009g97ig-5000.direct.labs.play-with-docker.com/metrics/",
+				url: "http://localhost:5000/metrics/",
 				type: "GET",
 				success: function(response) {
 					console.log(response);
