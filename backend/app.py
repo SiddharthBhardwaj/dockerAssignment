@@ -102,8 +102,8 @@ def getDataFromDb(tableName):
     total_time=0
     for row in results:
         total_time += row[2]
-    if total_time == 0:
-        avg_time = 0
+    if len(results) == 0:
+        avg_time = "NA"
     else:
         avg_time = total_time/len(results)
     
