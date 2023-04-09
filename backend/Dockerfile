@@ -1,11 +1,6 @@
 # start by pulling the python image
-FROM python:3.8-alpine
 FROM keinos/sqlite3:latest
-
-
-# run a command to change the folder permissions
-RUN chmod -R 777 /root/dockerAssignment
-RUN docker run --rm -it -v "$(pwd):/workspace" -w /workspace keinos/sqlite3
+FROM python:3.8-alpine
 
 # copy the requirements file into the image
 COPY ./requirements.txt /root/dockerImage/requirements.txt
@@ -18,6 +13,7 @@ RUN pip install -r requirements.txt
 
 # Expose the port
 EXPOSE 5000
+
 # copy every content from the local file to the image
 COPY . /root/dockerImage
 
