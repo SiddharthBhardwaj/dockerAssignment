@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  sidback:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      ports:
+        - "5000:5000"
+      expose:
+        - "5000"
+      command:
+        - bash -c "curl -o - -I http://localhost:5000/createtables"
